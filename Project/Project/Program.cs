@@ -6,54 +6,109 @@ namespace CalculatorApp
     {
         static void Main(string[] args)
         {
-            // Print informative header with Week 1 indicator, title, and name[cite: 8]
+            // Print informative header with Week 2 indicator, title, and name
             Console.WriteLine("========================================");
-            Console.WriteLine("Project Week 1: User Interactions and I/O");
+            Console.WriteLine("Project Week 2: Software Design & Control");
             Console.WriteLine("Developer: Christopher Creamer");
             Console.WriteLine("========================================");
 
-            // Print welcome message and basic instructions[cite: 8]
+            // Print welcome message and basic instructions
             Console.WriteLine("\nWelcome to the Console Calculator!");
-            Console.WriteLine("Instructions: Follow the prompts to perform integer and floating-point operations.\n");
-            Console.WriteLine("Quote: \"Code is like humor. When you have to explain it, it’s bad.\"\n");
+            Console.WriteLine("Instructions: Select an operation from the menu below.\n");
 
-            try
+            bool running = true;
+
+            // Looping control to keep the application running until the user quits
+            while (running)
             {
-                // Integer Operations: Allow user to enter two integers, add them, and display result[cite: 8]
-                Console.WriteLine("--- Integer Addition ---");
-                Console.Write("Enter first integer: ");
-                int int1 = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine("\n--- Main Menu ---");
+                Console.WriteLine("1. Add two numbers");
+                Console.WriteLine("2. Subtract two numbers");
+                Console.WriteLine("3. Multiply two numbers");
+                Console.WriteLine("4. Divide two numbers");
+                Console.WriteLine("5. Quit");
+                Console.Write("Enter your choice (1-5): ");
 
-                Console.Write("Enter second integer: ");
-                int int2 = Convert.ToInt32(Console.ReadLine());
+                string choice = Console.ReadLine();
 
-                int intSum = int1 + int2;
-                Console.WriteLine($"Result: {int1} + {int2} = {intSum:F2}\n");
-
-                // Floating-Point Operations: Allow user to enter two floats, subtract first from second, and display result[cite: 8]
-                Console.WriteLine("--- Floating-Point Subtraction ---");
-                Console.Write("Enter first floating-point value: ");
-                double float1 = Convert.ToDouble(Console.ReadLine());
-
-                Console.Write("Enter second floating-point value: ");
-                double float2 = Convert.ToDouble(Console.ReadLine());
-
-                double floatDiff = float2 - float1; 
-                Console.WriteLine($"Result: {float2} - {float1} = {floatDiff:F2}\n");
+                switch (choice)
+                {
+                    case "1":
+                        PerformAddition();
+                        break;
+                    case "2":
+                        PerformSubtraction();
+                        break;
+                    case "3":
+                        PerformMultiplication();
+                        break;
+                    case "4":
+                        PerformDivision();
+                        break;
+                    case "5":
+                        running = false;
+                        Console.WriteLine("\nThank you for using your calculator! Have a great day.");
+                        break;
+                    default:
+                        Console.WriteLine("\n[Error]: Invalid selection. Please enter a number between 1 and 5.");
+                        break;
+                }
             }
-            catch (FormatException)
-            {
-                Console.WriteLine("\n[Error]: Invalid numeric format entered. Please restart and enter valid numbers.");
-            }
-            catch (Exception ex)
-            {
-                Console.WriteLine($"\n[Error]: An unexpected error occurred: {ex.Message}");
-            }
 
-            // Closing Message thanking the user[cite: 8]
-            Console.WriteLine("\nThank you for using your calculator! Have a great day.");
-            Console.WriteLine("Press any key to exit...");
+            Console.WriteLine("\nPress any key to exit...");
             Console.ReadKey();
+        }
+
+        static void PerformAddition()
+        {
+            Console.WriteLine("\n--- Addition ---");
+            Console.Write("Enter first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Enter second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+            double result = num1 + num2;
+            Console.WriteLine($"Result: {num1} + {num2} = {result:F2}");
+        }
+
+        static void PerformSubtraction()
+        {
+            Console.WriteLine("\n--- Subtraction ---");
+            Console.Write("Enter first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Enter second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+            double result = num1 - num2;
+            Console.WriteLine($"Result: {num1} - {num2} = {result:F2}");
+        }
+
+        static void PerformMultiplication()
+        {
+            Console.WriteLine("\n--- Multiplication ---");
+            Console.Write("Enter first number: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Enter second number: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+            double result = num1 * num2;
+            Console.WriteLine($"Result: {num1} * {num2} = {result:F2}");
+        }
+
+        static void PerformDivision()
+        {
+            Console.WriteLine("\n--- Division ---");
+            Console.Write("Enter numerator: ");
+            double num1 = Convert.ToDouble(Console.ReadLine());
+            Console.Write("Enter denominator: ");
+            double num2 = Convert.ToDouble(Console.ReadLine());
+
+            if (num2 == 0)
+            {
+                Console.WriteLine("[Error]: Division by zero is not allowed.");
+            }
+            else
+            {
+                double result = num1 / num2;
+                Console.WriteLine($"Result: {num1} / {num2} = {result:F2}");
+            }
         }
     }
 }
