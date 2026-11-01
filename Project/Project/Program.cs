@@ -11,69 +11,81 @@ namespace CalculatorApp
 
         static void Main(string[] args)
         {
-            // Print informative header with Week 3 indicator, title, and name
+            // Print informative header with Week 4 indicator, title, and name
             Console.WriteLine("========================================");
-            Console.WriteLine("Project Week 3: Arrays, Lists & Math");
+            Console.WriteLine("Project Week 4: Exception Handling");
             Console.WriteLine("Developer: Christopher Creamer");
             Console.WriteLine("========================================");
 
             Console.WriteLine("\nWelcome to the Console Calculator!");
-            Console.WriteLine("Instructions: Use the menu below to calculate, manage memory, and view lists.\n");
+            Console.WriteLine("Instructions: Use the menu below. All inputs are protected by exception handling.\n");
 
             bool running = true;
 
             while (running)
             {
-                Console.WriteLine("\n--- Main Menu ---");
-                Console.WriteLine("1. Add numbers");
-                Console.WriteLine("2. Subtract numbers");
-                Console.WriteLine("3. Multiply numbers");
-                Console.WriteLine("4. Divide numbers");
-                Console.WriteLine("5. Square Root (Math Library)");
-                Console.WriteLine("6. Power (Math Library)");
-                Console.WriteLine("7. View Memory List (Up to 10 values)");
-                Console.WriteLine("8. Clear Memory");
-                Console.WriteLine("9. Quit");
-                Console.Write("Enter your choice (1-9): ");
-
-                string choice = Console.ReadLine();
-
-                switch (choice)
+                try
                 {
-                    case "1":
-                        PerformAddition();
-                        break;
-                    case "2":
-                        PerformSubtraction();
-                        break;
-                    case "3":
-                        PerformMultiplication();
-                        break;
-                    case "4":
-                        PerformDivision();
-                        break;
-                    case "5":
-                        PerformSquareRoot();
-                        break;
-                    case "6":
-                        PerformPower();
-                        break;
-                    case "7":
-                        ViewMemory();
-                        break;
-                    case "80": // Or 8
-                        ClearMemory();
-                        break;
-                    case "8":
-                        ClearMemory();
-                        break;
-                    case "9":
-                        running = false;
-                        Console.WriteLine("\nThank you for using your calculator! Have a great day.");
-                        break;
-                    default:
-                        Console.WriteLine("\n[Error]: Invalid selection. Please enter a number between 1 and 9.");
-                        break;
+                    Console.WriteLine("\n--- Main Menu ---");
+                    Console.WriteLine("1. Add numbers");
+                    Console.WriteLine("2. Subtract numbers");
+                    Console.WriteLine("3. Multiply numbers");
+                    Console.WriteLine("4. Divide numbers");
+                    Console.WriteLine("5. Square Root (Math Library)");
+                    Console.WriteLine("6. Power (Math Library)");
+                    Console.WriteLine("7. View Memory List (Up to 10 values)");
+                    Console.WriteLine("8. Clear Memory");
+                    Console.WriteLine("9. Quit");
+                    Console.Write("Enter your choice (1-9): ");
+
+                    string choice = Console.ReadLine();
+
+                    switch (choice)
+                    {
+                        case "1":
+                            PerformAddition();
+                            break;
+                        case "2":
+                            PerformSubtraction();
+                            break;
+                        case "3":
+                            PerformMultiplication();
+                            break;
+                        case "4":
+                            PerformDivision();
+                            break;
+                        case "5":
+                            PerformSquareRoot();
+                            break;
+                        case "6":
+                            PerformPower();
+                            break;
+                        case "7":
+                            ViewMemory();
+                            break;
+                        case "8":
+                            ClearMemory();
+                            break;
+                        case "9":
+                            running = false;
+                            Console.WriteLine("\nThank you for using your calculator! Have a great day.");
+                            break;
+                        default:
+                            Console.WriteLine("\n[Error]: Invalid selection. Please enter a number between 1 and 9.");
+                            break;
+                    }
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("\n[Exception Error]: Invalid numeric format entered. Please enter valid numbers.");
+                }
+                catch (DivideByZeroException)
+                {
+                    Console.WriteLine("\n[Exception Error]: Division by zero attempted.");
+                }
+                catch (Exception ex)
+                {
+                    Console.WriteLine($"\n[Exception Error]: An unexpected error occurred: {ex.Message}");
                 }
             }
 
@@ -136,14 +148,12 @@ namespace CalculatorApp
 
             if (num2 == 0)
             {
-                Console.WriteLine("[Error]: Division by zero is not allowed.");
+                throw new DivideByZeroException();
             }
-            else
-            {
-                double result = num1 / num2;
-                Console.WriteLine($"Result: {num1} / {num2} = {result:F2}");
-                StoreResult(result);
-            }
+
+            double result = num1 / num2;
+            Console.WriteLine($"Result: {num1} / {num2} = {result:F2}");
+            StoreResult(result);
         }
 
         static void PerformSquareRoot()
@@ -155,13 +165,12 @@ namespace CalculatorApp
             if (num < 0)
             {
                 Console.WriteLine("[Error]: Cannot calculate square root of a negative number.");
+                return;
             }
-            else
-            {
-                double result = Math.Sqrt(num);
-                Console.WriteLine($"Result: sqrt({num}) = {result:F2}");
-                StoreResult(result);
-            }
+
+            double result = Math.Sqrt(num);
+            Console.WriteLine($"Result: sqrt({num}) = {result:F2}");
+            StoreResult(result);
         }
 
         static void PerformPower()
