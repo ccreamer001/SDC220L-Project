@@ -5,20 +5,20 @@ namespace CalculatorApp
 {
     class Program
     {
-        // Memory collection to store up to 10 values
+        // Memory collection to store up to 10 historical values
         private static List<double> memoryList = new List<double>();
         private const int MaxMemorySize = 10;
 
         static void Main(string[] args)
         {
-            // Print informative header with Week 4 indicator, title, and name
+            // Print informative header with Final Phase indicator, title, and name
             Console.WriteLine("========================================");
-            Console.WriteLine("Project Week 4: Exception Handling");
+            Console.WriteLine("Project Week 5: Final Application Delivery");
             Console.WriteLine("Developer: Christopher Creamer");
             Console.WriteLine("========================================");
 
-            Console.WriteLine("\nWelcome to the Console Calculator!");
-            Console.WriteLine("Instructions: Use the menu below. All inputs are protected by exception handling.\n");
+            Console.WriteLine("\nWelcome to the Multi-Function Console Calculator!");
+            Console.WriteLine("Instructions: Use the menu below. All inputs and operations are fully protected.\n");
 
             bool running = true;
 
